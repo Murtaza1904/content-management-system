@@ -11,9 +11,6 @@ use Illuminate\Database\Seeder;
 
 final class EditorSeeder extends Seeder
 {
-    /**
-     * @use WithoutModelEvents
-     */
     use WithoutModelEvents;
 
     /**
@@ -21,14 +18,15 @@ final class EditorSeeder extends Seeder
      */
     public function run(): void
     {
-        $userService = new UserService();
+        $userService = new UserService;
 
-        for($i = 1; $i <= 5; $i++) {
-            $user = User::create([
+        for ($i = 1; $i <= 5; $i++) {
+            /** @var User $user */
+            $user = User::factory()->create([
                 'firstname' => fake()->firstName(),
-                'lastname'  => fake()->lastName(),
-                'email'     => fake()->safeEmail(),
-                'password'  => 'Pa$$w0rd!',
+                'lastname' => fake()->lastName(),
+                'email' => fake()->safeEmail(),
+                'password' => 'Pa$$w0rd!',
             ]);
 
             $userService->generateAvatar($user);

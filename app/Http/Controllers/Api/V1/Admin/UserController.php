@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Admin\UserRequest;
 use App\Http\Resources\Api\V1\Admin\UserResource;
+use App\Models\User;
 use App\Services\Api\V1\Admin\UserService;
+use Illuminate\Http\JsonResponse;
 
-final class UserController extends Controller
+final readonly class UserController
 {
     /**
      * Display a listing of the user.
@@ -38,7 +37,7 @@ final class UserController extends Controller
     {
         $user = User::create($userRequest->validated());
 
-        if (empty($user->avatar) || $user->avatar == '') {
+        if (empty($user->avatar)) {
             // Generate avatar if not provided
             $userService = new UserService();
             $userService->generateAvatar($user);
@@ -64,11 +63,16 @@ final class UserController extends Controller
      */
     public function update(UserRequest $userRequest, User $user): JsonResponse
     {
-        $user->update($userRequest->safe()->except('password'));
+        /** @var array<string,mixed> $data */
+        $data = $userRequest->safe()->except('password', 'avatar');
+        $user->fill($data);
 
-        if ($userRequest->filled('password')) {
-            $user->update(['password' => $userRequest->password]);
+        $password = $userRequest->validated('password');
+        if (is_string($password) && $password !== '') {
+            $user->password = $password;
         }
+
+        $user->save();
 
         return response()->json([
             'message' => 'User updated successfully',

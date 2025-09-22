@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @mixin \App\Models\User
+ */
 final class UserResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the user resource into an array.
      *
      * @return array<string>
      */

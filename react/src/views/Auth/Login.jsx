@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosClient from "../../axios-client";
 import { useStateContext } from "../../contexts/ContextProvider";
+import { sweetAlert } from "../../utils/alerts/alert";
 
 export default function Login() {
 
@@ -25,6 +26,7 @@ export default function Login() {
             .then(({ data }) => {
                 setUser(data.user);
                 setToken(data.token);
+                sweetAlert('Welcome to admin panel');
             })
             .catch((error) => {
                 const response = error.response;
@@ -74,7 +76,7 @@ export default function Login() {
                                     </div>
                                     <div className="row">
                                         <div className="col-6">
-                                            <button className="btn btn-primary px-4" type="submit">Login</button>
+                                            <button className="btn btn-primary px-4" id="login-button" type="submit">Login</button>
                                         </div>
                                         <div className="col-6 text-end">
                                             <Link className="btn btn-link px-0" to="/forgot-password">Forgot password?</Link>

@@ -1,4 +1,4 @@
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axiosClient from "../../../axios-client";
 import { useEffect, useState } from "react";
 import { confirmAlert } from "../../../utils/alerts/confirm";
@@ -118,14 +118,16 @@ export default function Index() {
                                                     </td>
                                                 </tr>
                                             )) : <tr className="text-center">
-                                                <td colSpan="6" className="text-danger">No user found!</td>
+                                                <td colSpan="7" className="text-danger">No user found!</td>
                                             </tr>}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <Pagination meta={meta} onPageChange={setPage} />
+                    {users && users.length > 0 && meta.currentPage !== meta.lastPage
+                        ? <Pagination meta={meta} onPageChange={setPage} />
+                        : ''}
                 </div>
             </div>
         </>

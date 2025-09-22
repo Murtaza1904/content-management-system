@@ -9,13 +9,13 @@ use Illuminate\Auth\Events\Login;
 
 final class LoginListener
 {
-    /**
-     * Handle the event.
-     */
     public function handle(Login $event): void
     {
+        /** @var \App\Models\User $user */
+        $user = $event->user;
+
         ActivityLog::create([
-            'user_id' => $event->user->id,
+            'user_id' => $user->id,
             'action' => 'login',
             'description' => 'User logged in',
         ]);

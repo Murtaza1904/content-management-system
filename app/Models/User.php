@@ -4,24 +4,37 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Observers\UserObserver;
+use Illuminate\Http\UploadedFile;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\UploadedFile;
 
+/**
+ * @property string $id
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $email
+ * @property string $password
+ * @property string $avatar
+ * @property string $description
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read User $user
+ */
+#[ObservedBy(UserObserver::class)]
 final class User extends Authenticatable
 {
-    /** 
+    /**
      * @use HasFactory<\Database\Factories\UserFactory>
-     * @use Notifiable<\Illuminate\Notifications\Notification>
      * @use HasApiTokens<\Laravel\Sanctum\PersonalAccessToken>
-     * @use HasUuids
      */
-    use HasFactory, Notifiable, HasApiTokens, HasUuids;
+    use HasApiTokens, HasFactory, HasUuids, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -47,6 +60,28 @@ final class User extends Authenticatable
     ];
 
     /**
+     * Interact with the user's avatar.
+     *
+     * @return Attribute<string, string|UploadedFile>
+     */
+    public function avatar(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value): mixed => $value instanceof UploadedFile ? $value->store('users') : $value,
+        );
+    }
+
+    /**
+     * Scope a query to exclude the super admin user.
+     *
+     * @param  Builder<User>  $query
+     */
+    public function scopeExcludeSuperAdmin(Builder $query): void
+    {
+        $query->whereNot('email', 'superadmin@cms.com');
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
@@ -56,24 +91,5 @@ final class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
-    }
-
-    /**
-     * Interact with the user's avatar.
-     */
-    public function avatar(): Attribute
-    {
-        return Attribute::make(
-            set: fn ($value): string|null => $value instanceof UploadedFile ? $value->store('users') : $value,
-        );
-    }
-
-    /**
-     * Scope a query to exclude the super admin user.
-     * @param Builder<\App\Models\User> $query
-     */
-    public function scopeExcludeSuperAdmin(Builder $query): void
-    {
-        $query->whereNot('email', 'superadmin@cms.com');
     }
 }

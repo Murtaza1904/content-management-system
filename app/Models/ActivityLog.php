@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -17,20 +17,16 @@ use Ramsey\Uuid\Uuid;
  * @property string $description
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  * @property-read User $user
  */
 final class ActivityLog extends Model
 {
-    /**
-     * @use HasUuids
-     */
     use HasUuids;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'user_id',
@@ -40,6 +36,8 @@ final class ActivityLog extends Model
 
     /**
      * Get the user that performs the activity.
+     *
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {

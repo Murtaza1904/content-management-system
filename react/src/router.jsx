@@ -12,6 +12,7 @@ import GuestLayout from "./components/layouts/GuestLayout";
 import DashboardLayout from "./components/layouts/DashboardLayout";
 import ErrorLayout from "./components/layouts/ErrorLayout";
 import Dashboard from "./views/Dashboard";
+import Info from "./views/Admin/Profile/Info";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <Dashboard />
+            },
+            //Profile
+            {
+                path: "/profile",
+                element: <Info />
             },
             //Users Management
             {

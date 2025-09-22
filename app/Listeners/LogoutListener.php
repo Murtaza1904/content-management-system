@@ -9,13 +9,13 @@ use Illuminate\Auth\Events\Logout;
 
 final class LogoutListener
 {
-    /**
-     * Handle the event.
-     */
     public function handle(Logout $event): void
     {
+        /** @var \App\Models\User $user */
+        $user = $event->user;
+
         ActivityLog::create([
-            'user_id' => $event->user->id,
+            'user_id' => $user->id,
             'action' => 'logout',
             'description' => 'User logged out',
         ]);

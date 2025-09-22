@@ -1,6 +1,7 @@
 import { useStateContext } from "../../contexts/ContextProvider";
 import Breadcrumb from "./Breadcrumb";
 import axiosClient from "../../axios-client";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header({ toggleSidebar }) {
   const { user, setUser, setToken } = useStateContext();
@@ -67,14 +68,11 @@ export default function Header({ toggleSidebar }) {
                 <div className="dropdown-header bg-body-tertiary text-body-secondary fw-semibold my-2">
                   <div className="fw-semibold">Settings</div>
                 </div>
-                <a className="dropdown-item" href="#">
+                <NavLink className={({ isActive }) => 'dropdown-item' + (isActive ? ' active' : '')} to="/profile">
                   <i className="bi bi-person pe-2"></i> Profile
-                </a>
-                <a className="dropdown-item" href="#">
-                  <i className="bi bi-gear pe-2"></i> Settings
-                </a>
+                </NavLink>
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#" onClick={logout}>
+                <a className="dropdown-item" href="#" id="logout-button" onClick={logout}>
                   <i className="bi bi-box-arrow-left pe-2"></i> Logout
                 </a>
               </div>
