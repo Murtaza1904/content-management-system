@@ -1,9 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../../../axios-client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { sweetAlert } from "../../../utils/alerts/alert";
 
 export default function Create() {
+    useEffect(() => {
+        document.title = 'Add Role - CMS';
+    }, []);
+
     const navigate = useNavigate();
 
     const firstnameRef = useRef();

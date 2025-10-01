@@ -26,6 +26,7 @@ export default function Edit() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = 'Edit User - CMS';
         axiosClient.get('/admin/users/' + id)
             .then(({ data }) => {
                 setUser(data.user);

@@ -14,6 +14,7 @@ export default function Index() {
     const [currentPage, setPage] = useState(pageFromUrl);
     
     useEffect(() => {
+        document.title = 'Users - CMS';
         setSearchParams({ page: currentPage });
         fetchUsers(currentPage);
     }, [currentPage]);

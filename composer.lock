@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b727b3d414296158ea0f034a4bfec57",
+    "content-hash": "d3e745e59d4e8b4ebe56d892777a6ddf",
     "packages": [
         {
             "name": "brick/math",
@@ -2176,6 +2176,135 @@
                 }
             ],
             "time": "2025-03-24T10:02:05+00:00"
+        },
+        {
+            "name": "murtaza1904/avatar-generator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Murtaza1904/avatar-generator.git",
+                "reference": "f7621ee43cceeb2717d489175d18b7ca0871ba0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Murtaza1904/avatar-generator/zipball/f7621ee43cceeb2717d489175d18b7ca0871ba0e",
+                "reference": "f7621ee43cceeb2717d489175d18b7ca0871ba0e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Avatar": "murtaza1904\\AvatarGenerator\\Facades\\Avatar"
+                    },
+                    "providers": [
+                        "murtaza1904\\AvatarGenerator\\AvatarServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "murtaza1904\\AvatarGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Murtaza",
+                    "email": "contact@muhammadmurtaza.com",
+                    "homepage": "https://muhammadmurtaza.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple Laravel package to generate avatar images from user name initials (PNG & SVG).",
+            "homepage": "https://github.com/murtaza1904/avatar-generator",
+            "keywords": [
+                "Initials",
+                "avatar",
+                "generator",
+                "laravel",
+                "png",
+                "profile-picture",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/murtaza1904/avatar-generator/issues",
+                "source": "https://github.com/murtaza1904/avatar-generator"
+            },
+            "time": "2025-09-23T09:28:09+00:00"
+        },
+        {
+            "name": "murtaza1904/roles-permissions",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Murtaza1904/roles-permissions.git",
+                "reference": "a83ffd67b620f45d8bf3addbe83c6e11a955c5a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Murtaza1904/roles-permissions/zipball/a83ffd67b620f45d8bf3addbe83c6e11a955c5a6",
+                "reference": "a83ffd67b620f45d8bf3addbe83c6e11a955c5a6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Murtaza1904\\RolesPermissions\\RolesPermissionsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Murtaza1904\\RolesPermissions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Murtaza",
+                    "email": "contact@muhammadmurtaza.com",
+                    "homepage": "https://muhammadmurtaza.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple Laravel package to manage user roles and permissions with middleware and artisan commands.",
+            "homepage": "https://github.com/murtaza1904/roles-permissions",
+            "keywords": [
+                "authorization",
+                "laravel",
+                "permissions",
+                "roles"
+            ],
+            "support": {
+                "issues": "https://github.com/murtaza1904/roles-permissions/issues",
+                "source": "https://github.com/murtaza1904/roles-permissions"
+            },
+            "time": "2025-10-01T18:10:46+00:00"
         },
         {
             "name": "nesbot/carbon",

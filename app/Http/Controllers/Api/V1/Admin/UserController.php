@@ -9,9 +9,18 @@ use App\Http\Resources\Api\V1\Admin\UserResource;
 use App\Models\User;
 use App\Services\Api\V1\Admin\UserService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
-final readonly class UserController
+final class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:view-users'])->only('index', 'show');
+        $this->middleware(['permission:create-users'])->only('create', 'store');
+        $this->middleware(['permission:edit-users'])->only('edit', 'update');
+        $this->middleware(['permission:delete-users'])->only('destroy');
+    }
+
     /**
      * Display a listing of the user.
      */

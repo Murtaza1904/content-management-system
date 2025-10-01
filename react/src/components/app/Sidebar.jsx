@@ -25,6 +25,11 @@ export default function Sidebar({ hidden }) {
           </li>
           <li className="nav-title">Management</li>
           <li className="nav-item">
+            <NavLink className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')} to="/roles">
+              <i className="bi bi-person-badge nav-icon"></i> Roles
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')} to="/users">
               <i className="bi bi-people nav-icon"></i> Users
             </NavLink>

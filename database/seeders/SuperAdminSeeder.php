@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
+use murtaza1904\RolesPermissions\Models\Role;
 
 final class SuperAdminSeeder extends Seeder
 {
@@ -29,12 +30,16 @@ final class SuperAdminSeeder extends Seeder
             $storagePath.'/super-admin-avatar.png',
         );
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'firstname' => 'Super',
             'lastname' => 'Admin',
             'email' => 'superadmin@cms.com',
             'password' => 'Pa$$w0rd!',
             'avatar' => 'avatars/super-admin-avatar.png',
         ]);
+
+        $role = Role::create(['name' => 'Super Admin']);
+
+        $user->assignRole($role);
     }
 }

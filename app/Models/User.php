@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use murtaza1904\RolesPermissions\Traits\HasRoles;
 
 /**
  * @property string $id
@@ -34,7 +35,7 @@ final class User extends Authenticatable
      * @use HasFactory<\Database\Factories\UserFactory>
      * @use HasApiTokens<\Laravel\Sanctum\PersonalAccessToken>
      */
-    use HasApiTokens, HasFactory, HasUuids, Notifiable;
+    use HasApiTokens, HasFactory, HasUuids, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

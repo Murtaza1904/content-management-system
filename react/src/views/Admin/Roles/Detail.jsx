@@ -4,27 +4,26 @@ import axiosClient from "../../../axios-client";
 
 export default function Detail() {
     let { id } = useParams();
-    const [user, setUser] = useState();
+    const [role, setRole] = useState();
 
     useEffect(() => {
-        document.title = 'User details - CMS';
-        axiosClient.get('/admin/users/' + id)
+        axiosClient.get('/admin/roles/' + id)
             .then(({ data }) => {
-                setUser(data.user);
+                setRole(data.role);
             });
     }, [id]);
 
-    if (!user) {
-        return (<div className="text-danger">User not found!</div>);
+    if (!role) {
+        return (<div className="text-danger">Role not found!</div>);
     }
     return (
         <>
             <div className="row">
                 <div className="col-md-12">
                     <div className="d-flex justify-content-between mb-3">
-                        <h1>User details</h1>
+                        <h1>Role details</h1>
                         <div>
-                            <Link className="btn btn-secondary" to="/users">
+                            <Link className="btn btn-secondary" to="/roles">
                                 <svg className="icon">
                                     <use xlinkHref="/node_modules/@coreui/icons/sprites/free.svg#cil-arrow-left"></use>
                                 </svg>
@@ -38,23 +37,26 @@ export default function Detail() {
                                 <table className="table table-bordered mb-0">
                                     <tbody className="fw-semibold text-nowrap">
                                         <tr>
-                                            <th>Firstname</th>
-                                            <td>{user.firstname}</td>
+                                            <th>Name</th>
+                                            <td>{role.name}</td>
                                         </tr>
                                         <tr>
-                                            <th>Lastname</th>
-                                            <td>{user.lastname}</td>
+                                            <th>Slug</th>
+                                            <td>{role.slug}</td>
                                         </tr>
                                         <tr>
-                                            <th>Email</th>
-                                            <td>{user.email}</td>
+                                            <th>Updated At</th>
+                                            <td>{role.updated_at}</td>
                                         </tr>
                                         <tr>
-                                            <th>Avatar</th>
+                                            <th>Permissions</th>
                                             <td>
-                                                <div className="avatar avatar-md">
-                                                    <img className="avatar-img" src={user.avatar} alt="user avatar" />
-                                                </div>
+                                                {role.permissions.length > 0
+                                                    ? role.permissions.map((permission) => (
+                                                        <span className="badge bg-secondary me-1" key={permission.id}>{permission.name}</span>
+                                                    ))
+                                                    : <span className="text-muted">No permissions assigned</span>
+                                                }
                                             </td>
                                         </tr>
                                     </tbody>

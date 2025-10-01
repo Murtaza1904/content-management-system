@@ -22,6 +22,7 @@ final readonly class AuthController
 
             return response()->json([
                 'user' => new UserResource($user),
+                'permissions' => $user->permissions()->pluck('name'),
                 'token' => $user->createToken('auth_token')->plainTextToken,
             ]);
         }

@@ -1,6 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./views/Auth/Login";
 import ForgotPassword from "./views/Auth/ForgotPassword";
+//Roles
+import RoleIndex from "./views/Admin/Roles/Index";
+import RoleCreate from "./views/Admin/Roles/Create";
+import RoleDetail from "./views/Admin/Roles/Detail";
+import RoleEdit from "./views/Admin/Roles/Edit";
 //Users
 import UserIndex from "./views/Admin/Users/Index";
 import UserCreate from "./views/Admin/Users/Create";
@@ -47,6 +52,23 @@ const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <Info />
+            },
+            //Roles Management
+            {
+                path: "/roles",
+                element: <RoleIndex />
+            },
+            {
+                path: "/roles/create",
+                element: <RoleCreate />
+            },
+            {
+                path: "/roles/:id",
+                element: <RoleDetail />
+            },
+            {
+                path: "/roles/:id/edit",
+                element: <RoleEdit />
             },
             //Users Management
             {

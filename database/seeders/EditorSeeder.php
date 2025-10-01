@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\Api\V1\Admin\UserService;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use murtaza1904\RolesPermissions\Models\Role;
 
 final class EditorSeeder extends Seeder
 {
@@ -30,6 +31,12 @@ final class EditorSeeder extends Seeder
             ]);
 
             $userService->generateAvatar($user);
+
+            $role = Role::firstOrCreate(['name' => 'Editor']);
+
+            $role->permissions()->syncWithoutDetaching([1, 5]);
+
+            $user->assignRole($role);
         }
     }
 }
